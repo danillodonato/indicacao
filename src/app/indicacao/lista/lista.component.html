@@ -1,0 +1,54 @@
+<main class="container">
+  <div class="bg-light p-5 rounded">
+    <h1>Lista indicações</h1>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>
+            Nome
+          </th>
+          <th>
+            CPF
+          </th>
+          <th>
+            Telefone
+          </th>
+          <th>
+            Email
+          </th>
+          <th>
+            Status
+          </th>
+          <th>
+            Ações
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr *ngFor="let indicacao of indicacoes">
+            <td>
+              {{indicacao.nome}}
+            </td>
+            <td>
+              {{indicacao.cpf}}
+            </td>
+            <td>
+              {{indicacao.telefone}}
+            </td>
+            <td>
+              {{indicacao.email}}
+            </td>
+            <td>
+              {{indicacao.descricao}}
+            </td>
+            <td>
+              <div class="form-group">
+                <button *ngIf="indicacao.status_id < 3" class="btn btn-sm btn-primary me-2" (click)="alteraStatus(indicacao.id, indicacao.status_id)">Alterar status</button>
+                <button class="btn btn-sm btn-danger" (click)="remove(indicacao.id)">Deletar</button>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+  </div>
+</main>

@@ -1,0 +1,37 @@
+<main class="container">
+    <div class="bg-light p-5 rounded">
+        <h1>Nova indicação</h1>
+        <form #indicacaoForm="ngForm" (ngSubmit)="inclui(indicacaoForm)">
+            <div class="row">
+                <div class="col-md-6">
+                    <label for="nome" class="label-control">Nome</label>
+                    <input ngModel #nome="ngModel" name="nome" type="text" class="form-control" required>
+                    <p *ngIf="nome.invalid && nome.touched" class="text-danger">Nome obrigatório</p>
+                </div>
+                <div class="col-md-6">
+                    <label for="cpf" class="label-control">CPF</label>
+                    <input ngModel #cpf="ngModel" name="cpf" type="text" class="form-control" placeholder="000.000.000-00" mask="000.000.000-00" extractValue="logValue($event)" (change)="validaCpf(indicacaoForm.value.cpf)" required>
+                    <p *ngIf="cpf.invalid && cpf.touched" class="text-danger">CPF obrigatório</p>
+                    <p *ngIf="cpfApi.invalid && cpf.touched" class="text-danger">{{ cpfApi.error }}</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <label for="telefone" class="label-control">Telefone</label>
+                    <input ngModel #telefone="ngModel" name="telefone" type="text" class="form-control" placeholder="(00)0000-0000" mask="(00)0000-0000" required>
+                    <p *ngIf="telefone.invalid && telefone.touched" class="text-danger">Telefone obrigatório</p>
+                </div>
+                <div class="col-md-6">
+                    <label for="email" class="label-control">Email</label>
+                    <input ngModel #email="ngModel" name="email" type="text" class="form-control" (change)="validaEmail(indicacaoForm.value.email)" required>
+                    <p *ngIf="email.invalid && email.touched" class="text-danger">Email obrigatório</p>
+                    <p *ngIf="emailApi.invalid && email.touched" class="text-danger">{{ emailApi.error }}</p>
+                </div>
+            </div>
+            <div class="d-flex justify-content-end mt-4">
+                <a class="btn btn-secondary me-2" (click)="voltar()">Cancelar</a>
+                <button type="submit" class="btn btn-primary" [disabled]="indicacaoForm.invalid || emailApi.invalid || cpfApi.invalid">Criar</button>
+            </div>
+        </form>
+    </div>
+</main>
